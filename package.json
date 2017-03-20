@@ -1,0 +1,26 @@
+{
+  "name": "metricsjs",
+  "description": "A node.js port of Coda Hale's metrics library.fork from metrics",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/OSMeteor/metricsjs.git"
+  },
+  "author": "meteorsoftware@qq.com",
+  "directories": {
+    "lib": "."
+  },
+  "engines": {
+    "node": ">=0.10.x"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^2.4.5",
+    "chai": "^3.5.0",
+    "chai-string": "^1.3.0",
+    "debug": "^2.5.2"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha test/unit"
+  }
+}
