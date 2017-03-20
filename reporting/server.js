@@ -9,16 +9,21 @@ var http = require('http')
 var Server = module.exports = function Server(port, trackedMetrics) {
   var self = this;
   this.report = new Report(trackedMetrics);
+  this.getReportSummary=function () {
+    return JSON.stringify(self.report.summary());
+  }; 
+  if(port!=-1) {
+    this.server = http.createServer(function (req, res) {
+      if (req.url.match(/^\/metrics/)) {
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.end(JSON.stringify(self.report.summary()));
+      } else {
+        res.writeHead(404, {'Content-Type': 'text/plain'});
+        res.end('Try hitting /metrics instead');
+      }
+    }).listen(port);
+  }
 
-  this.server = http.createServer(function (req, res) {
-    if (req.url.match(/^\/metrics/)) {
-      res.writeHead(200, {'Content-Type': 'application/json'});
-      res.end(JSON.stringify(self.report.summary()));
-    } else {
-      res.writeHead(404, {'Content-Type': 'text/plain'});
-      res.end('Try hitting /metrics instead');
-    }
-  }).listen(port);
 }
 
 /**
