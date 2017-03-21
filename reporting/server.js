@@ -9,9 +9,12 @@ var http = require('http')
 var Server = module.exports = function Server(port, trackedMetrics) {
   var self = this;
   this.report = new Report(trackedMetrics);
-  this.getReportSummary=function () {
+  this.getReportSummaryStr=function () {
     return JSON.stringify(self.report.summary());
-  }; 
+  };
+  this.getReportSummary=function () {
+    return self.report.summary();
+  };
   if(port!=-1) {
     this.server = http.createServer(function (req, res) {
       if (req.url.match(/^\/metrics/)) {
