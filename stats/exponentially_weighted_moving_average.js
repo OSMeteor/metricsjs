@@ -1,6 +1,6 @@
 /*
  *  Exponentially weighted moving average.
- *  Args: 
+ *  Args:
  *  - alpha:
  *  - interval: time in milliseconds
  */
@@ -34,7 +34,7 @@ EWMA.prototype.update = function(n) {
 EWMA.prototype.tick = function() {
   var  instantRate = this.uncounted / this.interval;
   this.uncounted = 0;
-  
+
   if(this.initialized) {
     this.currentRate += this.alpha * (instantRate - this.currentRate);
   } else {

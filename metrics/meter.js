@@ -1,6 +1,6 @@
 var EWMA = require('../stats/exponentially_weighted_moving_average.js');
 /*
-*  
+*
 */
 var Meter = module.exports = function Meter() {
   this.m1Rate = EWMA.createM1EWMA();
@@ -52,6 +52,15 @@ Meter.prototype.printObj = function() {
       , m15: this.fifteenMinuteRate()
       , mean: this.meanRate()
       , unit: 'seconds'};
+}
+Meter.prototype.printInsideObj = function() {
+  return {type: 'meter'
+    , count: this.count
+    , m1: this.oneMinuteRate()
+    , m5: this.fiveMinuteRate()
+    , m15: this.fifteenMinuteRate()
+    , mean: this.meanRate()
+    , unit: 'seconds'};
 }
 
 Meter.prototype.tick = function(){

@@ -33,13 +33,24 @@ Report.prototype.getMetric = function (eventName){
   if (!this.trackedMetrics[parts.ns]){ return; }
   return this.trackedMetrics[parts.ns][parts.name];
 }
-
+var startTime=(new Date()).getTime();
 Report.prototype.summary = function (){
-  var metricsObj = {};
+  var metricsObj = {startTime:startTime};
   for (namespace in this.trackedMetrics) {
     metricsObj[namespace] = {};
     for (name in this.trackedMetrics[namespace]) {
       metricsObj[namespace][name] = this.trackedMetrics[namespace][name].printObj();
+    }
+  }
+  return metricsObj;
+}
+
+Report.prototype.summaryInside = function (){
+  var metricsObj = {startTime:startTime,syncTime:(new Date()).getTime()};
+  for (namespace in this.trackedMetrics) {
+    metricsObj[namespace] = {};
+    for (name in this.trackedMetrics[namespace]) {
+      metricsObj[namespace][name] = this.trackedMetrics[namespace][name].printInsideObj();
     }
   }
   return metricsObj;

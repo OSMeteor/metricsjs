@@ -15,11 +15,19 @@ var Server = module.exports = function Server(port, trackedMetrics) {
   this.getReportSummary=function () {
     return self.report.summary();
   };
+  this.getReportSummaryInsideStr=function () {
+    return JSON.stringify(self.report.summaryInside());
+  };
+  this.getReportSummaryInside=function () {
+    return self.report.summaryInside();
+  };
+
+
   if(port!=-1) {
     this.server = http.createServer(function (req, res) {
       if (req.url.match(/^\/metrics/)) {
         res.writeHead(200, {'Content-Type': 'application/json'});
-        res.end(JSON.stringify(self.report.summary()));
+        res.end(self.getReportSummaryStr());
       } else {
         res.writeHead(404, {'Content-Type': 'text/plain'});
         res.end('Try hitting /metrics instead');
