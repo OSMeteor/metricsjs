@@ -1,7 +1,7 @@
 {
   "name": "metricsjs",
   "description": "A node.js port of Coda Hale's metrics library.fork from metrics",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "repository": {
     "type": "git",
     "url": "git://github.com/OSMeteor/metricsjs.git"
